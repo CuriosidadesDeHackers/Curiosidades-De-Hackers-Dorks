@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curiosidades De Hackers Dorks</title>
+    <link rel="icon" href="https://curiosidadesdehackers.com/wp-content/uploads/2024/05/2023-07-07_18-07-removebg-preview-1-244x300.png" type="image/x-icon">    <style>
+
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2d3037;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: calc(100% - 10px);
+            max-width: calc(100% - 10px);
+            margin: 5px;
+            padding: 20px;
+            border: 1px solid #009ee1;
+            border-radius: 10px;
+            background-color: #7A7A7A;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #009ee1;
+            border-radius: 5px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #009ee1;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #007bb8;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .category {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #009ee1;
+            border-radius: 10px;
+            background-color: #fff;
+            color: #000;
+        }
+        .category h2 {
+            margin-bottom: 10px;
+            color: #000;
+        }
+        .category ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .category li {
+            margin-bottom: 5px;
+        }
+        .category li a {
+            color: #000;
+            text-decoration: none;
+        }
+        .category li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: #c7c700;">Curiosidades De Hackers Dorks</h1>
+        <form id="domainForm">
+            <label for="domain">Dominio:</label>
+            <input type="text" id="domain" name="domain" placeholder="Ejemplo: ejemplo.com" required>
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+    <script>
+        const dorks = [
+            {
+                title: "🔎 Encontrar Subdominios",
+                queries: [
+                    "site:{domain} -www",
+                    "site:*.{domain}",
+                    "inurl:{domain} -www"
+                ]
+            },
+            {
+                title: "📄 Documentos Sensibles",
+                queries: [
+                    "site:{domain} filetype:pdf OR filetype:xls OR filetype:doc",
+                    "site:{domain} filetype:ppt OR filetype:txt OR filetype:csv",
+                    "site:{domain} intext:'confidential' OR intext:'internal use only'",
+                    "intitle:\"index.of\" \"parent directory\" \"size\" \"last modified\" \"description\" I Put A Spell On You (mp4|mp3|avi|flac|aac|ogg) -inurl:(jsp|php|html|aspx|htm|cf|shtml|lyrics-realm|mp3-collection) -site:.info",
+                    "intitle:\"index.of\" \"parent directory\" \"size\" \"last modified\" \"description\" Microsoft (pdf|txt|epub|doc|docx) -inurl:(jsp|php|html|aspx|htm|cf|shtml|ebooks|ebook) -site:.info"
+                ]
+            },
+            {
+                title: "💾 Bases de Datos",
+                queries: [
+                    "site:{domain} filetype:sql OR filetype:db OR filetype:sqlite",
+                    "site:{domain} inurl:phpmyadmin OR inurl:dbadmin",
+                    "site:{domain} intext:'MySQL dump' OR intext:'PostgreSQL backup'",
+                    "site:{domain} filetype:sql inurl:backup",
+                    "site:{domain} filetype:sql inurl:dump",
+                    "site:{domain} inurl:phpmyadmin OR inurl:adminer OR inurl:mysqladmin",
+                    "site:{domain} inurl:dbexport OR inurl:db-backup",
+                    "site:{domain} intext:'-- MySQL dump' OR intext:'-- PostgreSQL backup'",
+                    "site:{domain} inurl:'.sql' intext:'-- Created by mysqldump'",
+                    "site:{domain} intext:'Database dump' OR intext:'Database backup' OR intext:'DB dump'",
+                    "site:{domain} inurl:'.bak' OR inurl:'.sql.bak' OR inurl:'.db.bak'",
+                    "site:{domain} filetype:sql inurl:'/admin/'",
+                    "site:{domain} inurl:'.sql' AND intext:'Dump file'",
+                    "site:{domain} inurl:'.zip' intext:'Database backup' OR intext:'DB dump'",
+                    "site:{domain} inurl:'backup' intext:'database' OR intext:'DB' OR intext:'dump'",
+                    "site:{domain} filetype:sql inurl:'dump' AND intext:'password' OR intext:'username'",
+                    "site:{domain} inurl:'~user' AND intext:'database dump' OR intext:'sql backup'",
+                    "site:{domain} inurl:'.tar' intext:'database backup' OR intext:'database dump'",
+                    "ext:mdb inurl:*.mdb inurl:fpdb shop.mdb",
+                    "filetype:sql \"insert into\" (pass|passwd|password)",
+                    "filetype:sql (\"values * MD5\" | \"values * password\" | \"values * encrypt\")",
+                    "filetype:sql +\"IDENTIFIED BY\" -cvs",
+                    "filetype:sql password",
+                    "filetype:sql “insert into” (pass|passwd|password)",
+                    "filetype:mdb inurl:users.mdb",
+                    "filetype:ora ora",
+                    "filetype:ora tnsnames"
+                ]
+            },
+            {
+                title: "🔄 Open Redirect",
+                queries: [
+                    "site:{domain} inurl:redir",
+                    "site:{domain} inurl:url=",
+                    "site:{domain} inurl:return=",
+                    "site:{domain} inurl:r=",
+                    "site:{domain} inurl:q=",
+                    "site:{domain} inurl=redirect",
+                    "site:{domain} inurl=/out?",
+                    "site:{domain} inurl=/external?",
+                    "site:{domain} inurl=next=",
+                    "site:{domain} inurl=callback=",
+                    "site:{domain} inurl=goto=",
+                    "site:{domain} inurl=forward=",
+                    "site:{domain} inurl=to=",
+                    "site:{domain} inurl=continue=",
+                    "site:{domain} inurl=/cgi-bin/redirect.cgi?"
+                ]
+            },
+            {
+                title: "🛑 Logs y Errores",
+                queries: [
+                    "site:{domain} filetype:log",
+                    "site:{domain} 'error_log'",
+                    "site:{domain} intext:'PHP Fatal error'",
+                    "site:{domain} intext:'Exception' OR intext:'Traceback'",
+                    "site:{domain} intext:'server.log' OR intext:'access.log'",
+                    "site:{domain} filetype:txt intext:'error' OR intext:'log'",
+                    "site:{domain} inurl:/logs/ OR inurl:/log/",
+                    "site:{domain} intext:'failed password' OR intext:'authentication failed'",
+                    "site:{domain} intext:'SQL syntax error' OR intext:'database error'",
+                    "site:{domain} intext:'stack trace' OR intext:'uncaught exception'",
+                    "ext:log \"Software: Microsoft Internet Information Services *.*\"",
+                    "ext:log \"Software: Microsoft Internet Information",
+                    "ext:log \"Software: Microsoft Internet Information Services *.*\"",
+                    "filetype:log inurl:\"password.log\"",
+                    "filetype:log username putty PUTTY SSH client logs can reveal usernames",
+                    "filetype:log “PHP Parse error” | “PHP Warning” | “PHP Error”"
+                ]
+            },
+            {
+                title: "🔑 Claves API y Credenciales",
+                queries: [
+                    "site:{domain} intext:'API_KEY' OR intext:'TOKEN'",
+                    "site:{domain} filetype:json intext:'password'",
+                    "site:{domain} filetype:env intext:'DB_PASSWORD' OR intext:'AWS_SECRET_ACCESS_KEY'",
+                    "site:{domain} filetype:xml intext:'apikey'",
+                    "site:{domain} filetype:yaml intext:'API_SECRET'",
+                    "site:{domain} filetype:ini intext:'password'",
+                    "site:{domain} filetype:config intext:'secret'",
+                    "site:{domain} filetype:txt intext:'api_key'",
+                    "site:github.com {domain} intext:'token'",
+                    "site:gitlab.com {domain} intext:'PRIVATE_KEY'",
+                    "site:bitbucket.org {domain} intext:'ACCESS_TOKEN'",
+                    "site:pastebin.com {domain} intext:'API_KEY'",
+                    "site:{domain} inurl:'.git'",
+                    "filetype:config inurl:web.config inurl:ftp",
+                    "ext:(doc | pdf | xls | txt | ps | rtf | odt | sxw | psw | ppt | pps | xml) (intext:confidential salary | intext:\"budget approved\") inurl:confidential",
+                    "ext:inc \"pwd=\" \"UID=\"",
+                    "ext:ini intext:env.ini",
+                    "ext:ini Version=... password",
+                    "ext:ini Version=4.0.0.4 password",
+                    "ext:ini eudora.ini",
+                    "ext:ini intext:env.ini",
+                    "filetype:inc dbconn",
+                    "filetype:inc intext:mysql_connect",
+                    "filetype:inc mysql_connect OR mysql_pconnect",
+                    "filetype:pass pass intext:userid",
+                    "filetype:pdf \"Assessment Report\" nessus",
+                    "filetype:pem intext:private",
+                    "filetype:properties inurl:db intext:password",
+                    "filetype:pst inurl:\"outlook.pst\"",
+                    "filetype:pst pst -from -to -date",
+                    "filetype:reg reg +intext:\"defaultusername\" +intext:\"defaultpassword\"",
+                    "filetype:reg reg +intext:â? WINVNC3â?",
+                    "filetype:reg reg HKEY_CURRENT_USER SSHHOSTKEYS",
+                    "filetype:url +inurl:\"ftp://\" +inurl:\";@\"",
+                    "filetype:xls inurl:\"email.xls\"",
+                    "Financial spreadsheets: finance.xls",
+                    "Financial spreadsheets: finances.xls",
+                    "Ganglia Cluster Reports",
+                    "haccess.ctl (one way)",
+                    "haccess.ctl (VERY reliable)",
+                    "ICQ chat logs, please…",
+                    "intext:\"Session Start * * * *:*:*:* \" filetype:log",
+                    "intext:\"Tobias Oetiker\" \"traffic analysis\"",
+                    "intext:(password | passcode) intext:(username | userid | user) filetype:csv",
+                    "intext:gmail invite intext:http://gmail.google.com/gmail/a",
+                    "intext:SQLiteManager inurl:main.php",
+                    "intext:ViewCVS inurl:Settings.php",
+                    "intitle:\"admin panel\" +\"",
+                    "RedKernel",
+                    "intitle:\"Apache::Status\" (inurl:server-status | inurl:status.html | inurl:apache.html)",
+                    "intitle:\"AppServ Open Project\" -site:www.appservnetwork.com",
+                    "intitle:\"ASP Stats Generator *.*\" \"ASP Stats Generator\" \"2003-2004 weppos\"",
+                    "intitle:\"Big Sister\" +\"OK Attention Trouble\"",
+                    "intitle:\"curriculum vitae\" filetype:doc",
+                    "intitle:\"edna:streaming mp3 server\" -forums",
+                    "intitle:\"FTP root at\"",
+                    "intitle:\"index of\" +myd size",
+                    "intitle:\"Index Of\" -inurl:maillog maillog size",
+                    "intitle:\"Index Of\" cookies.txt size",
+                    "intitle:\"index of\" mysql.conf OR mysql_config",
+                    "intitle:\"index of\" upload size parent directory",
+                    "intitle:intranet inurl:intranet +intext:\"phone\"",
+                    "inurl:\"/axs/ax-admin.pl\" -script",
+                    "inurl:\"/cricket/grapher.cgi\"",
+                    "inurl:\"bookmark.htm\"",
+                    "inurl:\"cacti\" +inurl:\"graph_view.php\" +\"Settings Tree View\" -cvs -RPM",
+                    "inurl:\"index.php\" \"site designed by emarketsouth\"",
+                    "inurl:admin filetype:xls",
+                    "inurl:admin intitle:login",
+                    "inurl:backup filetype:mdb",
+                    "inurl:build.err",
+                    "inurl:cgi-bin/printenv",
+                    "inurl:cgi-bin/testcgi.exe \"Please distribute TestCGI\"",
+                    "inurl:changepassword.asp",
+                    "inurl:ds.py",
+                    "inurl:email filetype:mdb",
+                    "inurl:fcgi-bin/echo",
+                    "inurl:forum filetype:mdb",
+                    "inurl:forward filetype:forward -cvs",
+                    "inurl:getmsg.html intitle:hotmail",
+                    "inurl:log.nsf -gov",
+                    "inurl:main.php phpMyAdmin",
+                    "inurl:main.php Welcome to phpMyAdmin",
+                    "inurl:netscape.hst",
+                    "inurl:netscape.ini",
+                    "inurl:odbc.ini ext:ini -cvs",
+                    "inurl:perl/printenv",
+                    "inurl:php.ini filetype:ini",
+                    "inurl:preferences.ini \"[emule]\"",
+                    "inurl:profiles filetype:mdb",
+                    "inurl:report \"EVEREST Home Edition \"",
+                    "inurl:server-info \"Apache Server Information\"",
+                    "inurl:server-status \"apache\"",
+                    "inurl:snitz_forums_2000.mdb",
+                    "inurl:ssl.conf filetype:conf",
+                    "inurl:tdbin",
+                    "inurl:vbstats.php \"page generated\"",
+                    "inurl:wp-mail.php + \"There doesn't seem to be any new mail.\"",
+                    "inurl:XcCDONTS.asp",
+                    "ipsec.conf",
+                    "ipsec.secrets",
+                    "\"AutoCreate=TRUE password=*\"",
+                    "\"http://*:*@www\" domainname",
+                    "index of:/ \"ws_ftp.ini\" \"parent directory\"",
+                    "liveice configuration file\" ext:cfg -site:sourceforge.net",
+                    "parent directory\" +proftpdpasswd",
+                    "Duclassified\" -site:duware.com \"DUware All Rights reserved\"",
+                    "duclassmate\" -site:duware.com",
+                    "Dudirectory\" -site:duware.com",
+                    "Dudownload\" -site:duware.com",
+                    "Elite Forum Version *.*\"",
+                    "Link Department",
+                    "\"sets mode: +k\"",
+                    "\"your password is\" filetype:log",
+                    "DUpaypal\" -site:duware.com",
+                    "AIM buddy lists",
+                    "allinurl: admin mdb",
+                    "auth_user_file.txt",
+                    "config.php",
+                    "eggdrop filetype:user user",
+                    "enable password | secret \"current configuration\" -intext:the",
+                    "etc (index.of)",
+                    "ext:asa | ext:bak intext:uid intext:pwd -\"uid..pwd\" database | server | dsn",
+                    "ext:inc \"pwd=\" \"UID=\"",
+                    "ext:ini eudora.ini",
+                    "ext:ini Version=4.0.0.4 password",
+                    "ext:passwd -intext:the -sample -example",
+                    "ext:txt inurl:unattend.txt",
+                    "ext:yml database inurl:config",
+                    "filetype:bak createobject sa",
+                    "filetype:bak inurl:\"htaccess|passwd|shadow|htusers\"",
+                    "filetype:cfg mrtg \"target\"",
+                    "filetype:cfm \"cfapplication name\" password",
+                    "filetype:conf oekakibbs",
+                    "filetype:conf slapd.conf",
+                    "filetype:config config intext:appSettings \"User ID\"",
+                    "filetype:dat \"password.dat\"",
+                    "filetype:dat inurl:Sites.dat",
+                    "filetype:dat wand.dat",
+                    "filetype:inc dbconn",
+                    "filetype:inc intext:mysql_connect",
+                    "filetype:inc mysql_connect OR mysql_pconnect",
+                    "filetype:inf sysprep",
+                    "filetype:ini inurl:\"serv-u.ini\"",
+                    "filetype:ini inurl:flashFXP.ini",
+                    "filetype:ini ServUDaemon",
+                    "filetype:ini wcx_ftp.ini",
+                    "filetype:ldb admin",
+                    "filetype:log \"See `ipsec -copyright\"",
+                    "filetype:log inurl:\"password.log\"",
+                    "filetype:mdb inurl:users.mdb",
+                    "filetype:mdb wwforum",
+                    "filetype:netrc password",
+                    "filetype:pass pass intext:userid",
+                    "filetype:pem intext:private",
+                    "filetype:properties inurl:db intext:password",
+                    "filetype:pwl pwl",
+                    "filetype:reg \"Terminal Server Client logs can reveal usernames and passwords\"",
+                    "filetype:reg reg +intext:\"defaultusername\" +intext:\"defaultpassword\"",
+                    "filetype:reg reg +intext:â? WINVNC3â?",
+                    "filetype:reg reg HKEY_CURRENT_USER SSHHOSTKEYS",
+                    "filetype:sql \"insert into\" (pass|passwd|password)",
+                    "filetype:sql (\"values * MD5\" | \"values * password\" | \"values * encrypt\")",
+                    "filetype:sql +\"IDENTIFIED BY\" -cvs",
+                    "filetype:sql password",
+                    "filetype:url +inurl:\"ftp://\" +inurl:\";@\"",
+                    "filetype:xls username password email",
+                    "htpasswd",
+                    "htpasswd / htpasswd.bak",
+                    "intext:\"enable password 7\"",
+                    "intext:\"enable secret 5 \$\"",
+                    "intext:\"EZGuestbook\"",
+                    "intext:\"Web Wiz Journal\"",
+                    "intitle:\"--- VIDEO WEB SERVER ---\" intext:\"Video Web Server\" \"Any time & Any where\" username password",
+                    "intitle:\"500 Internal Server Error\" \"server at\"",
+                    "intitle:\"actiontec\" main setup status \"Copyright 2001 Actiontec Electronics Inc\"",
+                    "intitle:\"Backup Exec Administration\"",
+                    "intitle:\"b2evo > Login form\" \"Login form. You must log in! You will have to accept cookies in order to log in\" -demo -site:b2evolution.net",
+                    "intitle:\"Cisco CallManager User Options Log On\" \"Please enter your User ID and Password in the spaces provided below and click the Log On button to co",
+                    "intitle:\"ColdFusion Error Pages\"",
+                    "intitle:\"communigate pro * *\" intitle:\"entrance\"",
+                    "intitle:\"Content Management System\" \"user name\"|\"password\"|\"admin\" \"Microsoft IE 5.5\" -mambo",
+                    "intitle:\"Dell Remote Access Controller\"",
+                    "intitle:\"Docutek ERes - Admin Login\" -edu",
+                    "intitle:\"Employee Intranet Login\"",
+                    "intitle:\"eMule * *\" intitle:\"- Web Control Panel\" intext:\"Web Control Panel\" \"Enter your password here.\"",
+                    "intitle:\"ePowerSwitch Login\"",
+                    "intitle:\"eXist Database Administration\" -demo",
+                    "intitle:\"EXTRANET login\" -.edu -.mil -.gov",
+                    "intitle:\"EXTRANET * - Identification\"",
+                    "intitle:\"EXTRANET login\" -.edu -.mil -.gov",
+                    "intitle:\"EZPartner\" -netpond",
+                    "intitle:\"Flash Operator Panel\" -ext:php -wiki -cms -inurl:asternic -inurl:sip -intitle:ANNOUNCE -inurl:lists",
+                    "intitle:\"i-secure v1.1\" -edu",
+                    "intitle:\"Icecast Administration\"",
+                    "intitle:\"Icecast Status Page\"",
+                    "intitle:\"IMail Server Web Messaging\" intitle:login",
+                    "intitle:\"Incorrect syntax near\"",
+                    "intitle:\"Index of\" /\"chat/logs\"",
+                    "intitle:\"Installed Objects Scanner\" inurl:default.asp",
+                    "intitle:\"Internal Server Error\" \"server at\"",
+                    "intitle:\"liveice configuration file\" ext:cfg -site:sourceforge.net",
+                    "intitle:\"Login - Sun Cobalt RaQ\"",
+                    "intitle:\"Login prompt\" inurl:GM.cgi",
+                    "intitle:\"Login to Usermin\" inurl:20000",
+                    "intitle:\"Microsoft CRM : Unsupported Browser Version\"",
+                    "intitle:\"OPENSRS Domain Management\" inurl:manage.cgi",
+                    "intitle:\"pcANYWHERE EXPRESS Java Client\"",
+                    "intitle:\"Please authenticate yourself to get access to the management interface\"",
+                    "intitle:\"please log in\"",
+                    "intitle:\"Remote Desktop Web Connection\" inurl:tsweb",
+                    "intitle:\"Samba Web Administration Tool\" intext:\"Help Workgroup\"",
+                    "intitle:\"Terminal Services Web Connection\"",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
+                    "intitle:\"Uploader - Uploader v6\" -pixloads.com"
+                ]
+            }
+        ];
+
+        document.getElementById('domainForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const domain = document.getElementById('domain').value;
+            displayQueries(domain);
+        });
+
+        function displayQueries(domain) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+
+            dorks.forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+
+                const title = document.createElement('h2');
+                title.innerText = category.title;
+                categoryDiv.appendChild(title);
+
+                const ul = document.createElement('ul');
+                category.queries.forEach(query => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<a href="https://www.google.com/search?q=${encodeURIComponent(query.replace('{domain}', domain))}" target="_blank">${query.replace('{domain}', domain)}</a>`;
+                    ul.appendChild(li);
+                });
+                categoryDiv.appendChild(ul);
+                resultDiv.appendChild(categoryDiv);
+            });
+        }
+    </script>
+</body>
+</html>
