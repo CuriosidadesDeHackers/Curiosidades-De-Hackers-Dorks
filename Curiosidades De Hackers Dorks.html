@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta property="og:title" content="Selector de Dorks">
+    <meta property="og:description" content="Selector de Dorks es una herramienta web interactiva que permite generar automáticamente búsquedas avanzadas en Google (*Google Dorks*) basadas en un dominio específico.">
+    <meta property="og:image" content="https://curiosidadesdehackers.com/wp-content/uploads/2025/04/2023-07-07_18-07-278x300.png">
+    <meta property="og:url" content="https://poc.curiosidadesdehackers.com/xss.html">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Selector de Dorks">
+    <meta name="twitter:description" content="Selector de Dorks es una herramienta web interactiva que permite generar automáticamente búsquedas avanzadas en Google (*Google Dorks*) basadas en un dominio específico.">
+    <meta name="twitter:image" content="https://curiosidadesdehackers.com/wp-content/uploads/2025/04/2023-07-07_18-07-278x300.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curiosidades De Hackers Dorks</title>
-    <link rel="icon" href="https://curiosidadesdehackers.com/wp-content/uploads/2024/05/2023-07-07_18-07-removebg-preview-1-244x300.png" type="image/x-icon">    <style>
-
-body {
+    <title>Selector de Dorks</title>
+    <link rel="icon" href="https://curiosidadesdehackers.com/wp-content/uploads/2024/05/2023-07-07_18-07-removebg-preview-1-244x300.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+    <style>
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -17,6 +27,7 @@ body {
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            padding: 20px;
         }
         .container {
             width: calc(100% - 10px);
@@ -80,11 +91,102 @@ body {
         .category li a:hover {
             text-decoration: underline;
         }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #c7c700;
+        }
+        #social-media {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .social-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .social-buttons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            font-size: 14px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .social-buttons a.fa-globe { background-color: #4CAF50; }
+        .social-buttons a.fa-youtube { background-color: #FF0000; }
+        .social-buttons a.fa-telegram { background-color: #0088cc; }
+        .social-buttons a.fa-x-twitter { background-color: #1d9bf0; }
+        .social-buttons a.fa-linkedin { background-color: #0077b5; }
+        .social-buttons a.fa-instagram {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+        }
+        .social-buttons a.fa-github { background-color: #333; }
+        .social-buttons a.fa-tiktok { background-color: #000; }
+        .social-buttons a:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        @media (max-width: 768px) {
+            .social-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .social-buttons a {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+        /* Estilos para el footer */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 20px;
+            color: #fff;
+            font-size: clamp(12px, 2vw, 14px);
+            border-top: 1px solid #009ee1;
+            position: fixed;
+            bottom: 0;
+            background-color: #2d3037;
+        }
+        /* Estilo para el botón de Ko-fi */
+        .kofi-button {
+            position: fixed;
+            bottom: 80px; /* Ajustado para que no se superponga con el footer */
+            left: 20px;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 style="color: #c7c700;">Curiosidades De Hackers Dorks</h1>
+        <div class="header">
+            <h1>Selector de Dorks</h1>
+            <section id="social-media">
+                <div class="social-buttons">
+                    <a href="https://www.curiosidadesdehackers.com" target="_blank" class="fas fa-globe" title="Sitio Web"></a>
+                    <a href="https://www.youtube.com/channel/UCyFq3OKciq3VMNpTmzV1XTA" target="_blank" class="fab fa-youtube" title="YouTube"></a>
+                    <a href="https://t.me/CuriosidadesDeHackers" target="_blank" class="fab fa-telegram" title="Telegram"></a>
+                    <a href="https://twitter.com/HackersCuriosos" target="_blank" class="fab fa-x-twitter" title="X (Twitter)"></a>
+                    <a href="https://es.linkedin.com/in/manuel-mart%C3%ADnez-curiosidades-de-hackers-55b245289" target="_blank" class="fab fa-linkedin" title="LinkedIn"></a>
+                    <a href="https://www.instagram.com/curiosidadesdehackers/" target="_blank" class="fab fa-instagram" title="Instagram"></a>
+                    <a href="https://github.com/CuriosidadesDeHackers" target="_blank" class="fab fa-github" title="GitHub"></a>
+                    <a href="https://www.tiktok.com/@curiosidadesdehackers" target="_blank" class="fab fa-tiktok" title="TikTok"></a>
+                </div>
+            </section>
+        </div>
         <form id="domainForm">
             <label for="domain">Dominio:</label>
             <input type="text" id="domain" name="domain" placeholder="Ejemplo: ejemplo.com" required>
@@ -92,6 +194,14 @@ body {
         </form>
         <div id="result" class="result"></div>
     </div>
+    <!-- Botón flotante de Ko-fi -->
+    <div class="kofi-button">
+        <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+        <script type='text/javascript'>kofiwidget2.init('¿Me apoyas?', '#009ee1', 'O4O3W3IIA');kofiwidget2.draw();</script>
+    </div>
+    <footer>
+        <p>© CuriosidadesDeHackers 2025.</p>
+    </footer>
     <script>
         const dorks = [
             {
@@ -213,139 +323,9 @@ body {
                     "filetype:inc intext:mysql_connect",
                     "filetype:inc mysql_connect OR mysql_pconnect",
                     "filetype:pass pass intext:userid",
-                    "filetype:pdf \"Assessment Report\" nessus",
-                    "filetype:pem intext:private",
-                    "filetype:properties inurl:db intext:password",
-                    "filetype:pst inurl:\"outlook.pst\"",
-                    "filetype:pst pst -from -to -date",
-                    "filetype:reg reg +intext:\"defaultusername\" +intext:\"defaultpassword\"",
-                    "filetype:reg reg +intext:â? WINVNC3â?",
-                    "filetype:reg reg HKEY_CURRENT_USER SSHHOSTKEYS",
-                    "filetype:url +inurl:\"ftp://\" +inurl:\";@\"",
-                    "filetype:xls inurl:\"email.xls\"",
-                    "Financial spreadsheets: finance.xls",
-                    "Financial spreadsheets: finances.xls",
-                    "Ganglia Cluster Reports",
-                    "haccess.ctl (one way)",
-                    "haccess.ctl (VERY reliable)",
-                    "ICQ chat logs, please…",
-                    "intext:\"Session Start * * * *:*:*:* \" filetype:log",
-                    "intext:\"Tobias Oetiker\" \"traffic analysis\"",
-                    "intext:(password | passcode) intext:(username | userid | user) filetype:csv",
-                    "intext:gmail invite intext:http://gmail.google.com/gmail/a",
-                    "intext:SQLiteManager inurl:main.php",
-                    "intext:ViewCVS inurl:Settings.php",
-                    "intitle:\"admin panel\" +\"",
-                    "RedKernel",
-                    "intitle:\"Apache::Status\" (inurl:server-status | inurl:status.html | inurl:apache.html)",
-                    "intitle:\"AppServ Open Project\" -site:www.appservnetwork.com",
-                    "intitle:\"ASP Stats Generator *.*\" \"ASP Stats Generator\" \"2003-2004 weppos\"",
-                    "intitle:\"Big Sister\" +\"OK Attention Trouble\"",
-                    "intitle:\"curriculum vitae\" filetype:doc",
-                    "intitle:\"edna:streaming mp3 server\" -forums",
-                    "intitle:\"FTP root at\"",
-                    "intitle:\"index of\" +myd size",
-                    "intitle:\"Index Of\" -inurl:maillog maillog size",
-                    "intitle:\"Index Of\" cookies.txt size",
-                    "intitle:\"index of\" mysql.conf OR mysql_config",
-                    "intitle:\"index of\" upload size parent directory",
-                    "intitle:intranet inurl:intranet +intext:\"phone\"",
-                    "inurl:\"/axs/ax-admin.pl\" -script",
-                    "inurl:\"/cricket/grapher.cgi\"",
-                    "inurl:\"bookmark.htm\"",
-                    "inurl:\"cacti\" +inurl:\"graph_view.php\" +\"Settings Tree View\" -cvs -RPM",
-                    "inurl:\"index.php\" \"site designed by emarketsouth\"",
-                    "inurl:admin filetype:xls",
-                    "inurl:admin intitle:login",
-                    "inurl:backup filetype:mdb",
-                    "inurl:build.err",
-                    "inurl:cgi-bin/printenv",
-                    "inurl:cgi-bin/testcgi.exe \"Please distribute TestCGI\"",
-                    "inurl:changepassword.asp",
-                    "inurl:ds.py",
-                    "inurl:email filetype:mdb",
-                    "inurl:fcgi-bin/echo",
-                    "inurl:forum filetype:mdb",
-                    "inurl:forward filetype:forward -cvs",
-                    "inurl:getmsg.html intitle:hotmail",
-                    "inurl:log.nsf -gov",
-                    "inurl:main.php phpMyAdmin",
-                    "inurl:main.php Welcome to phpMyAdmin",
-                    "inurl:netscape.hst",
-                    "inurl:netscape.ini",
-                    "inurl:odbc.ini ext:ini -cvs",
-                    "inurl:perl/printenv",
-                    "inurl:php.ini filetype:ini",
-                    "inurl:preferences.ini \"[emule]\"",
-                    "inurl:profiles filetype:mdb",
-                    "inurl:report \"EVEREST Home Edition \"",
-                    "inurl:server-info \"Apache Server Information\"",
-                    "inurl:server-status \"apache\"",
-                    "inurl:snitz_forums_2000.mdb",
-                    "inurl:ssl.conf filetype:conf",
-                    "inurl:tdbin",
-                    "inurl:vbstats.php \"page generated\"",
-                    "inurl:wp-mail.php + \"There doesn't seem to be any new mail.\"",
-                    "inurl:XcCDONTS.asp",
-                    "ipsec.conf",
-                    "ipsec.secrets",
-                    "\"AutoCreate=TRUE password=*\"",
-                    "\"http://*:*@www\" domainname",
-                    "index of:/ \"ws_ftp.ini\" \"parent directory\"",
-                    "liveice configuration file\" ext:cfg -site:sourceforge.net",
-                    "parent directory\" +proftpdpasswd",
-                    "Duclassified\" -site:duware.com \"DUware All Rights reserved\"",
-                    "duclassmate\" -site:duware.com",
-                    "Dudirectory\" -site:duware.com",
-                    "Dudownload\" -site:duware.com",
-                    "Elite Forum Version *.*\"",
-                    "Link Department",
-                    "\"sets mode: +k\"",
-                    "\"your password is\" filetype:log",
-                    "DUpaypal\" -site:duware.com",
-                    "AIM buddy lists",
-                    "allinurl: admin mdb",
-                    "auth_user_file.txt",
-                    "config.php",
-                    "eggdrop filetype:user user",
-                    "enable password | secret \"current configuration\" -intext:the",
-                    "etc (index.of)",
-                    "ext:asa | ext:bak intext:uid intext:pwd -\"uid..pwd\" database | server | dsn",
-                    "ext:inc \"pwd=\" \"UID=\"",
-                    "ext:ini eudora.ini",
-                    "ext:ini Version=4.0.0.4 password",
-                    "ext:passwd -intext:the -sample -example",
-                    "ext:txt inurl:unattend.txt",
-                    "ext:yml database inurl:config",
-                    "filetype:bak createobject sa",
-                    "filetype:bak inurl:\"htaccess|passwd|shadow|htusers\"",
-                    "filetype:cfg mrtg \"target\"",
-                    "filetype:cfm \"cfapplication name\" password",
-                    "filetype:conf oekakibbs",
-                    "filetype:conf slapd.conf",
-                    "filetype:config config intext:appSettings \"User ID\"",
-                    "filetype:dat \"password.dat\"",
-                    "filetype:dat inurl:Sites.dat",
-                    "filetype:dat wand.dat",
-                    "filetype:inc dbconn",
-                    "filetype:inc intext:mysql_connect",
-                    "filetype:inc mysql_connect OR mysql_pconnect",
-                    "filetype:inf sysprep",
-                    "filetype:ini inurl:\"serv-u.ini\"",
-                    "filetype:ini inurl:flashFXP.ini",
-                    "filetype:ini ServUDaemon",
-                    "filetype:ini wcx_ftp.ini",
-                    "filetype:ldb admin",
-                    "filetype:log \"See `ipsec -copyright\"",
-                    "filetype:log inurl:\"password.log\"",
-                    "filetype:mdb inurl:users.mdb",
-                    "filetype:mdb wwforum",
-                    "filetype:netrc password",
-                    "filetype:pass pass intext:userid",
                     "filetype:pem intext:private",
                     "filetype:properties inurl:db intext:password",
                     "filetype:pwl pwl",
-                    "filetype:reg \"Terminal Server Client logs can reveal usernames and passwords\"",
                     "filetype:reg reg +intext:\"defaultusername\" +intext:\"defaultpassword\"",
                     "filetype:reg reg +intext:â? WINVNC3â?",
                     "filetype:reg reg HKEY_CURRENT_USER SSHHOSTKEYS",
@@ -353,72 +333,10 @@ body {
                     "filetype:sql (\"values * MD5\" | \"values * password\" | \"values * encrypt\")",
                     "filetype:sql +\"IDENTIFIED BY\" -cvs",
                     "filetype:sql password",
-                    "filetype:url +inurl:\"ftp://\" +inurl:\";@\"",
-                    "filetype:xls username password email",
-                    "htpasswd",
-                    "htpasswd / htpasswd.bak",
-                    "intext:\"enable password 7\"",
-                    "intext:\"enable secret 5 \$\"",
-                    "intext:\"EZGuestbook\"",
-                    "intext:\"Web Wiz Journal\"",
-                    "intitle:\"--- VIDEO WEB SERVER ---\" intext:\"Video Web Server\" \"Any time & Any where\" username password",
-                    "intitle:\"500 Internal Server Error\" \"server at\"",
-                    "intitle:\"actiontec\" main setup status \"Copyright 2001 Actiontec Electronics Inc\"",
-                    "intitle:\"Backup Exec Administration\"",
-                    "intitle:\"b2evo > Login form\" \"Login form. You must log in! You will have to accept cookies in order to log in\" -demo -site:b2evolution.net",
-                    "intitle:\"Cisco CallManager User Options Log On\" \"Please enter your User ID and Password in the spaces provided below and click the Log On button to co",
-                    "intitle:\"ColdFusion Error Pages\"",
-                    "intitle:\"communigate pro * *\" intitle:\"entrance\"",
-                    "intitle:\"Content Management System\" \"user name\"|\"password\"|\"admin\" \"Microsoft IE 5.5\" -mambo",
-                    "intitle:\"Dell Remote Access Controller\"",
-                    "intitle:\"Docutek ERes - Admin Login\" -edu",
-                    "intitle:\"Employee Intranet Login\"",
-                    "intitle:\"eMule * *\" intitle:\"- Web Control Panel\" intext:\"Web Control Panel\" \"Enter your password here.\"",
-                    "intitle:\"ePowerSwitch Login\"",
-                    "intitle:\"eXist Database Administration\" -demo",
-                    "intitle:\"EXTRANET login\" -.edu -.mil -.gov",
-                    "intitle:\"EXTRANET * - Identification\"",
-                    "intitle:\"EXTRANET login\" -.edu -.mil -.gov",
-                    "intitle:\"EZPartner\" -netpond",
-                    "intitle:\"Flash Operator Panel\" -ext:php -wiki -cms -inurl:asternic -inurl:sip -intitle:ANNOUNCE -inurl:lists",
-                    "intitle:\"i-secure v1.1\" -edu",
-                    "intitle:\"Icecast Administration\"",
-                    "intitle:\"Icecast Status Page\"",
-                    "intitle:\"IMail Server Web Messaging\" intitle:login",
-                    "intitle:\"Incorrect syntax near\"",
-                    "intitle:\"Index of\" /\"chat/logs\"",
-                    "intitle:\"Installed Objects Scanner\" inurl:default.asp",
-                    "intitle:\"Internal Server Error\" \"server at\"",
-                    "intitle:\"liveice configuration file\" ext:cfg -site:sourceforge.net",
-                    "intitle:\"Login - Sun Cobalt RaQ\"",
-                    "intitle:\"Login prompt\" inurl:GM.cgi",
-                    "intitle:\"Login to Usermin\" inurl:20000",
-                    "intitle:\"Microsoft CRM : Unsupported Browser Version\"",
-                    "intitle:\"OPENSRS Domain Management\" inurl:manage.cgi",
-                    "intitle:\"pcANYWHERE EXPRESS Java Client\"",
-                    "intitle:\"Please authenticate yourself to get access to the management interface\"",
-                    "intitle:\"please log in\"",
-                    "intitle:\"Remote Desktop Web Connection\" inurl:tsweb",
-                    "intitle:\"Samba Web Administration Tool\" intext:\"Help Workgroup\"",
-                    "intitle:\"Terminal Services Web Connection\"",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com",
-                    "intitle:\"Uploader - Uploader v6\" -pixloads.com"
+                    "filetype:sql “insert into” (pass|passwd|password)",
+                    "filetype:mdb inurl:users.mdb",
+                    "filetype:ora ora",
+                    "filetype:ora tnsnames"
                 ]
             }
         ];
