@@ -33,4 +33,4 @@ Este proyecto es una herramienta web para realizar búsquedas avanzadas en Googl
 
 ## 🚀 Cómo usar
 
-1. Acede a la web : [https://poc.curiosidadesdehackers.com/dorks.html](https://poc.curiosidadesdehackers.com/dorks.html)
+1. Acede a la web : [https://csrf.curiosidadesdehackers.com/dorks.html](https://csrf.curiosidadesdehackers.com/dorks.html)
