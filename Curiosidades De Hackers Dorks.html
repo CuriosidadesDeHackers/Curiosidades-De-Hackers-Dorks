@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -138,14 +140,27 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         @media (max-width: 768px) {
-            .social-buttons {
+            .header {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .header h1 {
+                width: 100%;
+                text-align: center;
+            }
+            #social-media {
+                width: 100%;
+                justify-content: center;
+            }
+            .social-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
             }
             .social-buttons a {
-                width: 40px;
-                height: 40px;
-                font-size: 18px;
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
             }
         }
         /* Estilos para el footer */
